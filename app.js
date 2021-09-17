@@ -10,14 +10,16 @@ class Despesa {
     }
 
     validarDados() {
-
+        for (let i in this) {
+            if (this[i] == undefined || this[i] == '' || this[i] == null) {
+                return false
+            }
+        }
+        return true
     }
-
-
 }
 
 class Bd {
-
     constructor() {
         let id = localStorage.getItem('id')
 
@@ -25,7 +27,6 @@ class Bd {
             localStorage.setItem('id', 0)
         }
     }
-
 
     getProximoId() {
         let proximoId = localStorage.getItem('id')
@@ -66,9 +67,11 @@ function cadastrarDespesa() {
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        //dialog de sucesso
+        //Diálogo Success
+        $('#sucessoGravacao').modal('show') //Uso de JQuery
     } else {
         //ERRO
+        $('#erroGravacao').modal('show') //Uso de JQuery
     }
 
 }
