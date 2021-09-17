@@ -8,6 +8,12 @@ class Despesa {
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados() {
+
+    }
+
+
 }
 
 class Bd {
@@ -19,6 +25,7 @@ class Bd {
             localStorage.setItem('id', 0)
         }
     }
+
 
     getProximoId() {
         let proximoId = localStorage.getItem('id')
@@ -56,7 +63,14 @@ function cadastrarDespesa() {
         valor.value
     )
 
-    bd.gravar(despesa)
+
+    if (despesa.validarDados()) {
+        bd.gravar(despesa)
+        //dialog de sucesso
+    } else {
+        //ERRO
+    }
+
 }
 
 
