@@ -1,4 +1,3 @@
-
 class Despesa {
     constructor(ano, mes, dia, tipo, descricao, valor) {
         this.ano = ano
@@ -35,7 +34,7 @@ class Bd {
 
     gravar(d) {
         let id = this.getProximoId()
-        //Permite converter para JSON
+            //Permite converter para JSON
         localStorage.setItem(id, JSON.stringify(d))
 
         localStorage.setItem('id', id)
@@ -63,7 +62,35 @@ class Bd {
     }
 
     pesquisar(despesa) {
-        console.log(despesa)
+        let despesasFiltradas = Array()
+
+        despesasFiltradas = this.recuperarTodosRegistros()
+
+        //ano 
+        if (despesa.ano != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesa.ano)
+        }
+
+        //mes
+        if (despesa.mes != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesa.mes)
+        }
+        //dia
+        if (despesa.dia != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesa.dia)
+        }
+        //tipo
+        if (despesa.tipo != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesa.tipo)
+        }
+        //descricao
+        if (despesa.descricao != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesa.descricao)
+        }
+        //valor
+        if (despesa.valor != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesa.valor)
+        }
     }
 }
 
@@ -133,7 +160,7 @@ function carregaListaDespesas() {
     let listaDespesas = document.getElementById('listaDespesas')
 
     //percorrer o array despesas, listando cada despesa de forma dinâmica
-    despesas.forEach(function (d) {
+    despesas.forEach(function(d) {
 
         //criando a linha (tr)
         let linha = listaDespesas.insertRow()
@@ -143,15 +170,20 @@ function carregaListaDespesas() {
 
         //Ajustar o tipo
         switch (d.tipo) {
-            case '1': d.tipo = 'Alimentação'
+            case '1':
+                d.tipo = 'Alimentação'
                 break;
-            case '2': d.tipo = 'Educação'
+            case '2':
+                d.tipo = 'Educação'
                 break;
-            case '3': d.tipo = 'Lazer'
+            case '3':
+                d.tipo = 'Lazer'
                 break;
-            case '4': d.tipo = 'Saúde'
+            case '4':
+                d.tipo = 'Saúde'
                 break;
-            case '5': d.tipo = 'Transporte'
+            case '5':
+                d.tipo = 'Transporte'
                 break;
         }
         linha.insertCell(1).innerHTML = d.tipo
